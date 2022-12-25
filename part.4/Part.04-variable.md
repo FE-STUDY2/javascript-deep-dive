@@ -152,14 +152,8 @@ var 키워드로 선언한 변수는 값을 재할당할 수 있다.
 
 > 예약어란? 프로그래밍 언어에서 사용되고 있거나 사용될 예정인 단어
 
-다음과 같다.
-|---|---|---|---|---|
-|await|brake|case|catch|class|const|
-|continue|debugger|default|delete|do|else|
-|enum|export|extends|false|finally|for|
-|function|if|let|null|var|while|
-등등..
-
+	await, break, case, catch, class, const, function, if, export
+	continue, debugger, default, delete, do else, false, true, null, 등등 ..
 
 > 변수는 쉼표로 구분해 하나의 문에서 여러 개를 한번에 선언할 수 있다. 하지만 가독성이 나빠지므로 권장하지 않는다.
 ```javascript
