@@ -143,3 +143,61 @@ var 키워드로 선언한 변수는 값을 재할당할 수 있다.
 
 ***
 
+> ## 4-7 식별자 네이밍 규칙
+
+식별자는 다음과 같은 네이밍 규칙을 준수해야 한다.
+- 특수문자를 제외한 문자, 숫자, 언더스코어(_), 달러($)를 포함할 수 있다.
+- 단, 특수문자를 제외한 문자, 언더스코어(_), 달러($)로 시작해야하며 숫자로 시작은 허용하지 않는다.
+- 예약어는 식별자로 사용할 수 없다.
+
+> 예약어란? 프로그래밍 언어에서 사용되고 있거나 사용될 예정인 단어
+
+다음과 같다.
+|await|brake|case|catch|class|const|
+|continue|debugger|default|delete|do|else|
+|enum|export|extends|false|finally|for|
+|function|if|let|null|var|while|
+등등..
+
+
+> 변수는 쉼표로 구분해 하나의 문에서 여러 개를 한번에 선언할 수 있다. 하지만 가독성이 나빠지므로 권장하지 않는다.
+```javascript
+var person, $elem, _name, first_name;
+``` 
+
+> 아래 식별자는 규칙에 위배되므로 사용할 수 없다.
+```javascript
+var first-name; // -이 들어가있음
+var 1st; // 숫자로 시작함
+var this; // 예약어 사용이 안됨
+```
+
+> 자바스크립트는 대소문자를 구별하므로 아래 변수는 별개의 변수다.
+```javascript
+var firstname;
+var firstName;
+var FIRSTNAME;
+```
+
+변수 이름은 변수의 존재 목적을 쉽게 이해할 수 있도록 의미를 명확이 표현해야 가독성이 높아진다.
+
+네이밍 컨벤션은 하나 이상의 영어 단어로 구성된 식별자를 만들 때 가독성 좋게 단어를 한눈에 구분하기 위해 규정한 명명 규칙이다.
+
+아래와 같은 유형이 자주 사용된다
+
+	// 카멜케이스
+	var firstName;
+
+	// 스네이크케이스
+	var first_name;
+
+	// 파스칼 케이스
+	var FirstName;
+
+	// 헝가리언 케이스 
+	var strFirstName; // type + identifier
+	var $elem = document.getElementById('myId'); // DOM노드
+	var observable$ = fromEvent(documnet, 'click'); // RxJS 옵저버블
+
+
+
