@@ -183,6 +183,7 @@ var FIRSTNAME;
 	```javascript
 	// 카멜케이스
 	var firstName;
+	```
 
 	// 스네이크케이스
 	var first_name;
