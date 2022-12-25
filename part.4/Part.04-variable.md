@@ -180,10 +180,10 @@ var FIRSTNAME;
 
 아래와 같은 유형이 자주 사용된다
 
-	```javascript
+```javascript
 	// 카멜케이스
 	var firstName;
-	```
+```
 
 	// 스네이크케이스
 	var first_name;
