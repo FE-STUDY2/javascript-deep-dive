@@ -153,6 +153,7 @@ var 키워드로 선언한 변수는 값을 재할당할 수 있다.
 > 예약어란? 프로그래밍 언어에서 사용되고 있거나 사용될 예정인 단어
 
 다음과 같다.
+|---|---|---|---|---|
 |await|brake|case|catch|class|const|
 |continue|debugger|default|delete|do|else|
 |enum|export|extends|false|finally|for|
