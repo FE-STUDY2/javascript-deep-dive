@@ -180,6 +180,7 @@ var FIRSTNAME;
 
 아래와 같은 유형이 자주 사용된다
 
+	```javascript
 	// 카멜케이스
 	var firstName;
 
@@ -193,6 +194,8 @@ var FIRSTNAME;
 	var strFirstName; // type + identifier
 	var $elem = document.getElementById('myId'); // DOM노드
 	var observable$ = fromEvent(documnet, 'click'); // RxJS 옵저버블
+	```
+
 
 
 
