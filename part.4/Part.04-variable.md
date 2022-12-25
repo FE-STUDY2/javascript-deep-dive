@@ -183,7 +183,6 @@ var FIRSTNAME;
 ```javascript
 	// 카멜케이스
 	var firstName;
-```
 
 	// 스네이크케이스
 	var first_name;
@@ -195,7 +194,7 @@ var FIRSTNAME;
 	var strFirstName; // type + identifier
 	var $elem = document.getElementById('myId'); // DOM노드
 	var observable$ = fromEvent(documnet, 'click'); // RxJS 옵저버블
-	```
+```
 
 
 
