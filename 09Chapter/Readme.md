@@ -218,4 +218,157 @@ Boolean([])        // -> true
 !![]        // -> true
 ```
 
+***
 
+## 단축 평가	
+
+### 논리 연산자를 사용한 단축 평가
+
+```jsx
+'cat' && 'dog' // -> 'dog'
+'cat' && false // -> false
+//&& 연산자는 두 개의 피연산자가 모두 true일 때 true를 반환한다
+
+'cat' || 'dog' // -> 'cat'
+'cat' || true // -> true
+//||연산자는 하나라도 true이면 true를 반환한다
+
+// 논리합(||) 연산자
+'Cat' || 'Dog'  // -> "Cat"
+false || 'Dog'  // -> "Dog"
+'Cat' || false  // -> "Cat"
+
+// 논리곱(&&) 연산자
+'Cat' && 'Dog'  // -> "Dog"
+false && 'Dog'  // -> false
+'Cat' && false  // -> false
+```
+
+- 어떤 조건이 Truthy 값인 경우 `&&`연산자 표현식으로 `if`문을 대체할 수 있다
+
+```jsx
+var done = true
+var message = ''
+
+// 주어진 조건이 true일 때
+if (done) message = '완료'
+
+// if 문은 단축 평가로 대체 가능하다.
+// done이 true라면 message에 '완료'를 할당
+message = done && '완료'
+console.log(message) // 완료
+```
+
+- 조건이 Falsy 값인 경우 `||` 연산자 표현식으로 `if`문을 대체할 수 있다
+```jsx
+var done = false
+var message = ''
+
+// 주어진 조건이 false일 때
+if (!done) message = '미완료'
+
+// if 문은 단축 평가로 대체 가능하다.
+// done이 false라면 message에 '미완료'를 할당
+message = done || '미완료'
+console.log(message) // 미완료
+```
+
+- 삼항 조건 연산자는 `if..else`문을 대체할 수 있다
+```jsx
+var done = true
+var message = ''
+
+// if...else 문
+if (done) message = '완료'
+else      message = '미완료'
+console.log(message) // 완료
+
+// if...else 문은 삼항 조건 연산자로 대체 가능하다.
+message = done ? '완료' : '미완료'
+console.log(message) // 완료
+```
+
+
+> 객체를 가리키기를 기대하는 변수가 null 또는 undefined가 아닌지 확인하고 프로퍼티를 참조할 때
+```jsx
+var elem = null
+var value = elem.value // TypeError: Cannot read property 'value' of null
+
+// 이때 단축 평가를 사용하면 에러를 발생시키지 않는다.
+var elem = null
+// elem이 null이나 undefined와 같은 Falsy 값이면 elem으로 평가되고
+// elem이 Truthy 값이면 elem.value로 평가된다.
+var value = elem && elem.value // -> null
+```
+
+
+> 함수 매개변수에 기본값을 설정할 때
+- 함수를 호출할 때 인수를 전달하지 않으면 매개변수에는 undefined가 할당되는데, 단축 평가를 사용하면 이를 방지할 수 있다.
+
+```jsx
+// 단축 평가를 사용한 매개변수의 기본값 설정
+function getStringLength(str) {
+  str = str || ''  // 단축 평가
+  return str.length
+}
+
+getStringLength()     // -> 0
+getStringLength('hi') // -> 2
+
+
+// ES6의 매개변수의 기본값 설정
+function getStringLength(str = '') {
+  return str.length
+}
+
+getStringLength()     // -> 0
+getStringLength('hi') // -> 2
+```
+
+
+### 옵셔널 체이닝 연산자
+- ES11(ECMAScript2020)에 도입된 null 병합(nullish coalescing)연산자 ?.는 좌항의 피연산자가 null 또는 undefined인 경우 우항의 피연산자를 반환하고, 그렇지 않으면 좌항의 피연산자를 반환한다.
+
+```jsx
+var elem = null
+
+//elem이 null 또는 undefined이면 undefined를 반환하고 그렇지 않으면 우항의 프로퍼티 참조를 이어간다
+var value = elem?.value
+console.log(value)        // undefined
+```
+
+- 옵셔널 체이닝 연산자 ?.는 좌항 피연산자가 false로 평가되는 Falsy 값이라도 null 또는 undefined가 아니면 우항의 프로퍼티 참조를 이어간다
+
+```jsx
+var str = ''
+
+var length = str?.length
+console.log(length) // 0
+```
+
+
+### null 병합 연산자
+- ES11(ECMAScript2020)에 도입된 null 병합(nullish coalescing)연산자 ?.는 좌항의 피연산자가 null 또는 undefined인 경우 우항의 피연산자를 반환하고, 그렇지 않으면 좌항의 피연산자를 반환한다.
+
+```jsx
+// 좌항의 피연산자가 null 또는 undefined이면 우항의 피연산자를 반환하고,
+// 그렇지 않으면 좌항의 피연산자를 반환한다.
+var foo = null ?? 'default string'
+console.log(foo) // "default string"
+```
+
+null 병합 연산자 ??는 변수에 기본값을 설정할 때 유용하다. null 병합 연산자 ??가 도입되기 이전에는
+논리 연산자 `||`을 사용한 단축 평가를 통해 변수에 기본값을 설정했다.
+논리 연산자 `||`을 사용한 단축평가의 경우 좌항의 피연산자가 false로 평가되는 Falsy 값(false, undefined, null, 0, -0, NaN, '')이면 우항의 피연산자를 반환한다.
+만약 Falsy 값인 0이나 ''도 기본값으로서 유요하다면 예기치 않은 동작이 방샐할 수 있다.
+
+```jsx
+// Falsy 값인 0이나 ''도 기본값으로서 유효하다면 예기치 않은 동작이 발생할 수 있다.
+var foo = '' || 'default string'
+console.log(foo) // "default string"
+
+
+// 좌항의 피연산자가 Falsy 값이라도 null 또는 undefined이 아니면 좌항의 피연산자를 반환한다.
+var foo = '' ?? 'default string'
+console.log(foo); // ""
+```
