@@ -1,0 +1,42 @@
+## 21장 빌트인 객체 
+
+```jsx
+// ① 식별자 str은 문자열을 값으로 가지고 있다.
+const str = 'hello';
+
+// ② 식별자 str은 암묵적으로 생성된 래퍼 객체를 가리킨다.
+// 식별자 str의 값 'hello'는 래퍼 객체의 [[StringData]] 내부 슬롯에 할당된다.
+// 래퍼 객체에 name 프로퍼티가 동적 추가된다.
+str.name = 'Lee';
+
+// ③ 식별자 str은 다시 원래의 문자열, 즉 래퍼 객체의 [[StringData]] 내부 슬롯에 할당된 원시값을 갖는다.
+// 이때 ②에서 생성된 래퍼 객체는 아무도 참조하지 않는 상태이므로 가비지 컬렉션의 대상이 된다.
+
+// ④ 식별자 str은 새롭게 암묵적으로 생성된(②에서 생성된 래퍼 객체와는 다른) 래퍼 객체를 가리킨다.
+// 새롭게 생성된 래퍼 객체에는 name 프로퍼티가 존재하지 않는다.
+console.log(str.name); // undefined
+
+// ⑤ 식별자 str은 다시 원래의 문자열, 즉 래퍼 객체의 [[StringData]] 내부 슬롯에 할당된 원시값을 갖는다.
+// 이때 ④에서 생성된 래퍼 객체는 아무도 참조하지 않는 상태이므로 가비지 컬렉션의 대상이 된다.
+console.log(typeof str, str);
+```
+
+```jsx
+let foo = 123
+console.log(window.foo)
+```
+
+```jsx
+const x = 1;
+
+function foo() {
+  eval('var x = 2; console.log(x);'); // 2
+  // let, const 키워드를 사용한 변수 선언문은 strict mode가 적용된다.
+  eval('const x = 3; console.log(x);'); // 3
+  console.log(x); // 2
+}
+
+foo();
+console.log(x); // 1
+
+```
